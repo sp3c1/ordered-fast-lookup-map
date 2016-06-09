@@ -4,7 +4,7 @@ var expect = require('expect.js');
 
 describe('Ordered Fast Look Up Map', function () {
 
-    var OFLM = require('..')();
+    var OFLM = require('..');
 
     describe('initation', function () {
         it('should create empty map', function () {

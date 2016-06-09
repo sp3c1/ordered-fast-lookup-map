@@ -186,6 +186,4 @@ class OFLM {
     };
 }
 
-module.exports = function () {
-    return OFLM;
-};
+module.exports = OFLM;
