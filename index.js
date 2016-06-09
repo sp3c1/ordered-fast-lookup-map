@@ -155,13 +155,13 @@ class OFLM {
      *
      * @param f callback function(key, value)
      */
-    forEach(f) {
+    forEach(callback) {
         let key, value;
         for (var i = 0; i < this._array.length; i++) {
             key = this._array[i];
             value = this.map[key];
 
-            let breakFlag = f(key, value);
+            let breakFlag = callback(key, value);
             if (breakFlag) {
                 return;
             }
@@ -172,13 +172,13 @@ class OFLM {
      *
      * @param f
      */
-    forEachReverse(f) {
+    forEachReverse(callback) {
         let key, value;
         for (var i = this._array.length - 1; i >= 0; i--) {
             key = this._array[i];
             value = this.map[key];
 
-            let breakFlag = f(key, value);
+            let breakFlag = callback(key, value);
             if (breakFlag) {
                 return;
             }
