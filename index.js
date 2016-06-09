@@ -153,7 +153,7 @@ class OFLM {
 
     /** @brief iteration method over map
      *
-     * @param f callback function(key, value)
+     * @param callback callback function(key, value)
      */
     forEach(callback) {
         let key, value;
@@ -170,7 +170,7 @@ class OFLM {
 
     /** @brief backwards iterator
      *
-     * @param f
+     * @param callback
      */
     forEachReverse(callback) {
         let key, value;
