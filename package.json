@@ -1,0 +1,31 @@
+{
+    "name": "ordered-fast-lookup-map",
+    "version": "0.0.1",
+    "description": "Map with order functionality, providing fast look ups and ordering in the same time.",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sp3c1/ordered-fast-lookup-map.git"
+    },
+    "keywords": [
+        "map",
+        "list",
+        "ordered",
+        "associative",
+        "lookup",
+        "vector"
+    ],
+    "author": "Bartlomiej Specjalny",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/sp3c1/ordered-fast-lookup-map/issues"
+    },
+    "homepage": "https://github.com/sp3c1/ordered-fast-lookup-map#readme",
+    "devDependencies": {
+        "expect.js": "^0.3.1",
+        "mocha": "^2.5.3"
+    }
+}
