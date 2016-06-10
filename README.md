@@ -36,12 +36,14 @@ structure and perform ```push``` on pair of keys. Exampple:``` var hashMap = ord
 * ```unshift(key, value)``` sets the value on the beginning of structure
 * ```arbitrarySetAfter(afterKey, key, value)```sets the value after arbitrary supplied keys. If the arbitrary key is
 not found it throws ```Error```.
+* ```arbitrarySetAfter(beforeKey, key, value)```sets the value before arbitrary supplied keys. If the arbitrary key is
+not found it throws ```Error```.
 
 ### Remove & Retrieve methods 
 * ```remove(key)``` remove arbitrary value on the key. If the arbitrary key is not found it throws```Error```.
 * ```pop()``` returns last element of structure and removes it. If list is empty returns ```undefined```
 * ```shift()``` returns first element of structure and removes it. If list is empty returns ```undefined```
-* ```get(key)``` returns value on the key without deleting it (might return reference). If the arbitrary key is not
+* ```get(key)``` returns value on the key without deleting it (return reference). If the arbitrary key is not
 found it throws ```Error```.
 * ```has(key)``` checks if key exists (```true/false```)
 
@@ -55,3 +57,4 @@ To break in user function return ```true```.
 ## Future Work
 * Async callback iterations
 * Promise iterations
+* weakGet

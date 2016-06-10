@@ -66,7 +66,7 @@ describe('Ordered Fast Look Up Map', function () {
             expect(oflm.map).to.be.eql({"1": "a", "2": "b"});
         });
 
-        it('should failt to push as there is not afterKey ', function () {
+        it('should failt to push as there is not afterKey in empty', function () {
             let oflm = new OFLM();
             try {
                 oflm.arbitrarySetAfter('1', '2', "b");
@@ -76,13 +76,61 @@ describe('Ordered Fast Look Up Map', function () {
             }
         });
 
-        it('should push emtry between two other', function () {
+        it('should failt to push as there is not afterKey in non empty', function () {
+            let oflm = new OFLM([4], ["e"]);
+            try {
+                oflm.arbitrarySetAfter('1', '2', "b");
+                expect(false).to.be.ok();
+            } catch (e) {
+                expect(typeof e).to.be.equal(typeof (new Error()));
+            }
+        });
+
+        it('should push entry between two other', function () {
             let oflm = new OFLM();
             oflm.push("1", "a");
             oflm.push("2", "b");
             oflm.arbitrarySetAfter('1', '3', "c");
             expect(oflm._array).to.be.eql(['1', '3', '2']);
             expect(oflm.map).to.be.eql({"1": "a", "2": "b", "3": "c"});
+        });
+
+        it('should push entry before first element', function () {
+            let oflm = new OFLM(["1", "2"], ["a", "b"]);
+
+            oflm.arbitrarySetBefore('1', '3', "c");
+            expect(oflm._array).to.be.eql(['3', '1', '2']);
+            expect(oflm.map).to.be.eql({"3": "c", "1": "a", "2": "b"});
+        });
+
+        it('should push entry inbetween', function () {
+            let oflm = new OFLM(["1", "2"], ["a", "b"]);
+
+            oflm.arbitrarySetBefore('2', '3', "c");
+            expect(oflm._array).to.be.eql(['1', '3', '2']);
+            expect(oflm.map).to.be.eql({"1": "a", "2": "b", "3": "c"});
+        });
+
+        it('should try to push before and throw error', function () {
+            let oflm = new OFLM(["1", "2"], ["a", "b"]);
+
+            try {
+                oflm.arbitrarySetBefore('4', '3', "c");
+                expect(false).to.be.ok();
+            } catch (e) {
+
+            }
+        });
+
+        it('should try to push before in empty', function () {
+            let oflm = new OFLM();
+
+            try {
+                oflm.arbitrarySetBefore('4', '3', "c");
+                expect(false).to.be.ok();
+            } catch (e) {
+                expect(typeof e).to.be.equal(typeof (new Error()));
+            }
         });
     });
 

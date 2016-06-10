@@ -66,6 +66,21 @@ class OrderedFastLookupMap {
         this.map[key] = value;
     }
 
+    /** @brief insert to map before given key
+     *
+     * @param beforeKey
+     * @param key
+     * @param value
+     */
+    arbitrarySetBefore(beforeKey, key, value) {
+        let beforeIndex = this._array.indexOf(beforeKey);
+        if (beforeIndex == -1) {
+            throw new Error('key does not exist');
+        }
+        this._array.splice(beforeIndex, 0, key);
+        this.map[key] = value;
+    }
+
     /***========================================= REMOVE Methods ***/
 
     /** @brief removing element from map
