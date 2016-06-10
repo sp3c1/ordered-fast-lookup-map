@@ -257,11 +257,11 @@ describe('Ordered Fast Look Up Map', function () {
             expect(oflm.has(7)).to.be.ok();
             expect(oflm.has(8)).to.be.ok();
 
-            expect(oflm.get(1)).to.be.equal(false);
+            expect(oflm.get(1)).to.be.equal(undefined);
             expect(oflm.get(2)).to.be.equal("b");
-            expect(oflm.get(3)).to.be.equal(false);
+            expect(oflm.get(3)).to.be.equal(undefined);
             expect(oflm.get(4)).to.be.equal("d");
-            expect(oflm.get(5)).to.be.equal(false);
+            expect(oflm.get(5)).to.be.equal(undefined);
             expect(oflm.get(6)).to.be.equal("f");
             expect(oflm.get(7)).to.be.equal("g");
             expect(oflm.get(8)).to.be.equal("h");
