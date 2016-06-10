@@ -1,6 +1,6 @@
 'use strict';
 
-class OFLM {
+class OrderedFastLookupMap {
     constructor(keys, values) {
         var self = this;
         //console.log('constructor', keys, values);
@@ -186,4 +186,4 @@ class OFLM {
     };
 }
 
-module.exports = OFLM;
+module.exports = OrderedFastLookupMap;

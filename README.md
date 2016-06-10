@@ -2,21 +2,32 @@
 Map with order functionality, providing fast look ups and ordering in the same time wiht ```O(n)``` complexity. 
 
 ## Requirements
-Was written on ```4.4.0``` and is using some of the es6 features.
+Was written on ```4.4.0``` and is using some of the es6 features:
+* ```Class```
+* ```let```
 
 ## Installation
 ```npm install ordered-fast-lookup-map```
 
+## Testing
+
+### Dev Dependecies
+* ```mocha```
+* ```expect```
+
+### Test
+Run ```mocha``` or ```npm run test```.
+
 ## Usage
 ```
 var orderedMap = require("ordered-fast-lookup-map")
-var userMap = new orderer();
+var userMap = new orderedMap();
 ```
 
-## Avaible methods 
+## Available methods
 
 ### Constructor
-* ```constructor(key,value)```
+* ```constructor([key,value])```
 
 ### Add methods
 * ```set(key,value)```
@@ -34,3 +45,8 @@ var userMap = new orderer();
 ### Iteration Methods
 * ```forEach(callback)```
 * ```forEachReverse(callback)```
+
+
+## Future Work
+* Async callback iterations
+* Promise iterations
