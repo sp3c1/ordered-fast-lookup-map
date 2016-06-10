@@ -36,7 +36,7 @@ structure and perform ```push``` on pair of keys. Exampple:``` var hashMap = ord
 * ```unshift(key, value)``` sets the value on the beginning of structure
 * ```arbitrarySetAfter(afterKey, key, value)```sets the value after arbitrary supplied keys. If the arbitrary key is
 not found it throws ```Error```.
-* ```arbitrarySetAfter(beforeKey, key, value)```sets the value before arbitrary supplied keys. If the arbitrary key is
+* ```arbitrarySetBefore(beforeKey, key, value)```sets the value before arbitrary supplied keys. If the arbitrary key is
 not found it throws ```Error```.
 
 ### Remove & Retrieve methods 
