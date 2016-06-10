@@ -27,24 +27,29 @@ var userMap = new orderedMap();
 ## Available methods
 
 ### Constructor
-* ```constructor([key,value])```
+* ```constructor([keysArray,valuesArrays])``` - when supplied with ```keysArray``` and ```valuesArrays``` initiates
+structure and perform ```push``` on pair of keys. Exampple:``` var hashMap = orderedMap([1,2,3],["a","b","c"]);```
 
 ### Add methods
-* ```set(key,value)```
-* ```push(key,value)```
-* ```unshift(key, value)```
-* ```arbitrarySetAfter(afterKey, key, value)```
+* ```set(key,value)``` sets the value on the end of structure
+* ```push(key,value)``` alias for set
+* ```unshift(key, value)``` sets the value on the beginning of structure
+* ```arbitrarySetAfter(afterKey, key, value)```sets the value after arbitrary supplied keys. If the arbitrary key is
+not found it throws ```Error```.
 
 ### Remove & Retrieve methods 
-* ```remove(key)```
-* ```pop()```
-* ```shift()```
-* ```get(key)```
-* ```has(key)```
+* ```remove(key)``` remove arbitrary value on the key. If the arbitrary key is not found it throws```Error```.
+* ```pop()``` returns last element of structure and removes it. If list is empty returns ```undefined```
+* ```shift()``` returns first element of structure and removes it. If list is empty returns ```undefined```
+* ```get(key)``` returns value on the key without deleting it (might return reference). If the arbitrary key is not
+found it throws ```Error```.
+* ```has(key)``` checks if key exists (```true/false```)
 
 ### Iteration Methods
-* ```forEach(callback)```
-* ```forEachReverse(callback)```
+* ```forEach(callback)``` for each element in ```asc``` order executes user supplied ```function(index,value)```.
+To break in user function return true.
+* ```forEachReverse(callback)```for each element in ```desc``` order executes user supplied ```function(index,value)```.
+To break in user function return true.
 
 
 ## Future Work
