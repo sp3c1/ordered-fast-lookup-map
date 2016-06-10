@@ -47,9 +47,9 @@ found it throws ```Error```.
 
 ### Iteration Methods
 * ```forEach(callback)``` for each element in ```asc``` order executes user supplied ```function(index,value)```.
-To break in user function return true.
+To break in user function return ```true```.
 * ```forEachReverse(callback)```for each element in ```desc``` order executes user supplied ```function(index,value)```.
-To break in user function return true.
+To break in user function return ```true```.
 
 
 ## Future Work
