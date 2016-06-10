@@ -1,6 +1,6 @@
 {
   "name": "ordered-fast-lookup-map",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Map with order functionality, providing fast look ups and ordering in the same time.",
   "main": "index.js",
   "scripts": {
