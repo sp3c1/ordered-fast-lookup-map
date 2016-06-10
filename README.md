@@ -58,3 +58,7 @@ To break in user function return ```true```.
 * Async callback iterations
 * Promise iterations
 * weakGet
+* first
+* last
+* length
+* merge
