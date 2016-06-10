@@ -124,10 +124,10 @@ class OrderedFastLookupMap {
             if (this.map[key]) {
                 return this.map[key];
             } else {
-                return false;
+                return undefined;
             }
         } catch (e) {
-            return false;
+            return undefined;
         }
     }
 
