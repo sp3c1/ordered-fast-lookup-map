@@ -2,116 +2,116 @@
 var mocha = require('mocha');
 var expect = require('expect.js');
 
-describe('Ordered Fast Look Up Map', function () {
+describe('Ordered Fast Look Up Map', function() {
 
     var OFLM = require('..');
 
-    describe('initation', function () {
-        it('should create empty map', function () {
+    describe('initation', function() {
+        it('should create empty map', function() {
             let oflm = new OFLM();
             expect(oflm._array).to.be.empty();
             expect(oflm.map).to.be.empty();
         });
 
-        it('should create map with one value', function () {
+        it('should create map with one value', function() {
             let oflm = new OFLM([1], ["a"]);
 
             expect(oflm._array).to.be.eql(['1']);
-            expect(oflm.map).to.be.eql({"1": "a"});
+            expect(oflm.map).to.be.eql({ "1": "a" });
         });
 
-        it('should create map with one value', function () {
+        it('should create map with one value', function() {
             let oflm = new OFLM([1, 2], ["a", "b"]);
 
             expect(oflm._array).to.be.eql(['1', '2']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b" });
         });
 
-        it('should throw exceptions for uneven number of elements', function () {
+        it('should throw exceptions for uneven number of elements', function() {
 
         });
 
 
     });
 
-    describe('adding elements', function () {
-        it('should push element on the back when empty (alias set)', function () {
+    describe('adding elements', function() {
+        it('should push element on the back when empty (alias set)', function() {
             let oflm = new OFLM();
             oflm.push("1", "a");
             expect(oflm._array).to.be.eql(['1']);
-            expect(oflm.map).to.be.eql({"1": "a"});
+            expect(oflm.map).to.be.eql({ "1": "a" });
         });
 
 
-        it('should push second elements on the back', function () {
+        it('should push second elements on the back', function() {
             let oflm = new OFLM();
             oflm.push("1", "a");
             oflm.push("2", "b");
             expect(oflm._array).to.be.eql(['1', '2']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b" });
         });
 
-        it('should push element on the front when empty', function () {
+        it('should push element on the front when empty', function() {
             let oflm = new OFLM();
             oflm.unshift("1", "a");
             expect(oflm._array).to.be.eql(['1']);
-            expect(oflm.map).to.be.eql({"1": "a"});
+            expect(oflm.map).to.be.eql({ "1": "a" });
         });
 
-        it('should push second element on the front ', function () {
+        it('should push second element on the front ', function() {
             let oflm = new OFLM();
             oflm.unshift("1", "a");
             oflm.unshift("2", "b");
             expect(oflm._array).to.be.eql(['2', '1']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b" });
         });
 
-        it('should failt to push as there is not afterKey in empty', function () {
+        it('should failt to push as there is not afterKey in empty', function() {
             let oflm = new OFLM();
             try {
                 oflm.arbitrarySetAfter('1', '2', "b");
                 expect(false).to.be.ok();
             } catch (e) {
-                expect(typeof e).to.be.equal(typeof (new Error()));
+                expect(typeof e).to.be.equal(typeof(new Error()));
             }
         });
 
-        it('should failt to push as there is not afterKey in non empty', function () {
+        it('should failt to push as there is not afterKey in non empty', function() {
             let oflm = new OFLM([4], ["e"]);
             try {
                 oflm.arbitrarySetAfter('1', '2', "b");
                 expect(false).to.be.ok();
             } catch (e) {
-                expect(typeof e).to.be.equal(typeof (new Error()));
+                expect(typeof e).to.be.equal(typeof(new Error()));
             }
         });
 
-        it('should push entry between two other', function () {
+        it('should push entry between two other', function() {
             let oflm = new OFLM();
             oflm.push("1", "a");
             oflm.push("2", "b");
             oflm.arbitrarySetAfter('1', '3', "c");
             expect(oflm._array).to.be.eql(['1', '3', '2']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b", "3": "c"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b", "3": "c" });
         });
 
-        it('should push entry before first element', function () {
+        it('should push entry before first element', function() {
             let oflm = new OFLM(["1", "2"], ["a", "b"]);
 
             oflm.arbitrarySetBefore('1', '3', "c");
             expect(oflm._array).to.be.eql(['3', '1', '2']);
-            expect(oflm.map).to.be.eql({"3": "c", "1": "a", "2": "b"});
+            expect(oflm.map).to.be.eql({ "3": "c", "1": "a", "2": "b" });
         });
 
-        it('should push entry inbetween', function () {
+        it('should push entry inbetween', function() {
             let oflm = new OFLM(["1", "2"], ["a", "b"]);
 
             oflm.arbitrarySetBefore('2', '3', "c");
             expect(oflm._array).to.be.eql(['1', '3', '2']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b", "3": "c"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b", "3": "c" });
         });
 
-        it('should try to push before and throw error', function () {
+        it('should try to push before and throw error', function() {
             let oflm = new OFLM(["1", "2"], ["a", "b"]);
 
             try {
@@ -122,132 +122,132 @@ describe('Ordered Fast Look Up Map', function () {
             }
         });
 
-        it('should try to push before in empty', function () {
+        it('should try to push before in empty', function() {
             let oflm = new OFLM();
 
             try {
                 oflm.arbitrarySetBefore('4', '3', "c");
                 expect(false).to.be.ok();
             } catch (e) {
-                expect(typeof e).to.be.equal(typeof (new Error()));
+                expect(typeof e).to.be.equal(typeof(new Error()));
             }
         });
     });
 
 
-    describe('removing', function () {
-        it('remove element form back', function () {
+    describe('removing', function() {
+        it('remove element form back', function() {
             let oflm = new OFLM([1, 2, 3, 4], ["a", "b", "c", "d"]);
             let element = oflm.pop();
             expect(element).to.be.equal("d");
             expect(oflm._array).to.be.eql(['1', '2', '3']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b", "3": "c"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b", "3": "c" });
         });
 
-        it('remove two elements form back', function () {
+        it('remove two elements form back', function() {
             let oflm = new OFLM([1, 2, 3, 4], ["a", "b", "c", "d"]);
             let element = oflm.pop();
             let elementB = oflm.pop();
             expect(element).to.be.equal("d");
             expect(elementB).to.be.equal("c");
             expect(oflm._array).to.be.eql(['1', '2']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b" });
         });
 
-        it('remove form back where no elements are in', function () {
+        it('remove form back where no elements are in', function() {
             let oflm = new OFLM();
             let element = oflm.pop();
             expect(element).to.not.ok();
         });
 
-        it('remove form back where no elements are in after removal', function () {
+        it('remove form back where no elements are in after removal', function() {
             let oflm = new OFLM([1], ["a"]);
             oflm.pop();
             let element = oflm.pop();
             expect(element).to.not.ok();
         });
 
-        it('remove element form the front', function () {
+        it('remove element form the front', function() {
             let oflm = new OFLM([1, 2, 3, 4], ["a", "b", "c", "d"]);
             let element = oflm.shift();
             expect(element).to.be.equal("a");
             expect(oflm._array).to.be.eql(['2', '3', '4']);
-            expect(oflm.map).to.be.eql({"2": "b", "3": "c", "4": "d"});
+            expect(oflm.map).to.be.eql({ "2": "b", "3": "c", "4": "d" });
         });
 
-        it('remove two elements form the front', function () {
+        it('remove two elements form the front', function() {
             let oflm = new OFLM([1, 2, 3, 4], ["a", "b", "c", "d"]);
             let element = oflm.shift();
             let elementB = oflm.shift();
             expect(element).to.be.equal("a");
             expect(elementB).to.be.equal("b");
             expect(oflm._array).to.be.eql(['3', '4']);
-            expect(oflm.map).to.be.eql({"3": "c", "4": "d"});
+            expect(oflm.map).to.be.eql({ "3": "c", "4": "d" });
         });
 
-        it('remove form from where no elements are in', function () {
+        it('remove form from where no elements are in', function() {
             let oflm = new OFLM();
             let element = oflm.shift();
             expect(element).to.not.ok();
         });
 
-        it('remove form from where no elements are in after removal', function () {
+        it('remove form from where no elements are in after removal', function() {
             let oflm = new OFLM([1], ["a"]);
             oflm.shift();
             let element = oflm.shift();
             expect(element).to.not.ok();
         });
 
-        it('remove element from arbitrary key', function () {
+        it('remove element from arbitrary key', function() {
             let oflm = new OFLM(["1", "2", "3"], ["a", "b", "c"]);
             oflm.remove("2");
             expect(oflm._array).to.be.eql(['1', '3']);
-            expect(oflm.map).to.be.eql({"1": "a", "3": "c"});
+            expect(oflm.map).to.be.eql({ "1": "a", "3": "c" });
         });
 
-        it('remove element from arbitrary key first one', function () {
+        it('remove element from arbitrary key first one', function() {
             let oflm = new OFLM([1, 2, 3], ["a", "b", "c"]);
             oflm.remove(1);
             expect(oflm._array).to.be.eql(['2', '3']);
-            expect(oflm.map).to.be.eql({"2": "b", "3": "c"});
+            expect(oflm.map).to.be.eql({ "2": "b", "3": "c" });
         });
 
-        it('remove element from arbitrary key lest one', function () {
+        it('remove element from arbitrary key lest one', function() {
             let oflm = new OFLM([1, 2, 3], ["a", "b", "c"]);
             oflm.remove(3);
             expect(oflm._array).to.be.eql(['1', '2']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b"});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b" });
         });
 
-        it('remove 2 element from middle', function () {
+        it('remove 2 element from middle', function() {
             let oflm = new OFLM([1, 2, 3, 4, 5], ["a", "b", "c", "d", "e"]);
             oflm.remove(3);
             oflm.remove(4);
             expect(oflm._array).to.be.eql(['1', '2', '5']);
-            expect(oflm.map).to.be.eql({"1": "a", "2": "b", "5": 'e'});
+            expect(oflm.map).to.be.eql({ "1": "a", "2": "b", "5": 'e' });
         });
 
-        it('remove from arbitrary key where no elements are present', function () {
+        it('remove from arbitrary key where no elements are present', function() {
             let oflm = new OFLM();
             try {
                 oflm.remove(2);
                 expect(false).to.be.ok();
             } catch (e) {
-                expect(typeof e).to.be.equal(typeof (new Error()));
+                expect(typeof e).to.be.equal(typeof(new Error()));
             }
         });
 
-        it('remove from arbitrary key where specyfic key is not present', function () {
+        it('remove from arbitrary key where specyfic key is not present', function() {
             let oflm = new OFLM([1, 2, 3, 4, 5], ["a", "b", "c", "d", "e"]);
             try {
                 oflm.remove(6);
                 expect(false).to.be.ok();
             } catch (e) {
-                expect(typeof e).to.be.equal(typeof (new Error()));
+                expect(typeof e).to.be.equal(typeof(new Error()));
             }
         });
 
-        it('remove from front, back and middle', function () {
+        it('remove from front, back and middle', function() {
             let oflm = new OFLM([1, 2, 3, 4, 5], ["a", "b", "c", "d", "e"]);
             let elementFront = oflm.shift();
             let elementBack = oflm.pop();
@@ -259,14 +259,14 @@ describe('Ordered Fast Look Up Map', function () {
             expect(elementMiddle).to.be.eql("c");
 
             expect(oflm._array).to.be.eql(['2', '4']);
-            expect(oflm.map).to.be.eql({"2": "b", "4": "d"});
+            expect(oflm.map).to.be.eql({ "2": "b", "4": "d" });
         });
 
     });
 
-    describe('access', function () {
+    describe('access', function() {
 
-        it('should check access to elements fresh after insert', function () {
+        it('should check access to elements fresh after insert', function() {
             let oflm = new OFLM([1, 2, 3, 4, 5], ["a", "b", "c", "d", "e"]);
 
             expect(oflm.has(1)).to.be.ok();
@@ -283,7 +283,7 @@ describe('Ordered Fast Look Up Map', function () {
         });
 
 
-        it('should check access to elements after operation', function () {
+        it('should check access to elements after operation', function() {
 
             let oflm = new OFLM([1, 2, 3, 4, 5], ["a", "b", "c", "d", "e"]);
             oflm.shift();
@@ -294,7 +294,7 @@ describe('Ordered Fast Look Up Map', function () {
             oflm.arbitrarySetAfter(2, 8, "h");
 
             expect(oflm._array).to.be.eql(['6', '2', '8', '4', '7']);
-            expect(oflm.map).to.be.eql({"2": "b", "4": "d", "6": "f", "7": "g", "8": "h"});
+            expect(oflm.map).to.be.eql({ "2": "b", "4": "d", "6": "f", "7": "g", "8": "h" });
 
             expect(oflm.has(1)).to.not.be.ok();
             expect(oflm.has(2)).to.be.ok();
@@ -315,15 +315,47 @@ describe('Ordered Fast Look Up Map', function () {
             expect(oflm.get(8)).to.be.equal("h");
         });
 
+        it('should find false, 0, null', function() {
+            var oflm = new OFLM();
+
+            oflm.set('key1', 0);
+            oflm.set('key2', false);
+            oflm.set('key3', null);
+            try {
+                oflm.set('key4', undefined)
+                expect('Do not allow to pass undefined').to.be(' yet it went through');
+            } catch (e) {
+                //ok
+            }
+
+            expect(oflm.has('key1')).to.be.equal(true);
+            expect(oflm.has('key2')).to.be.equal(true);
+            expect(oflm.has('key3')).to.be.equal(true);
+            expect(oflm.has('key4')).to.be.equal(false);
+
+            expect(oflm.get('key1')).to.be.equal(0);
+            expect(oflm.get('key2')).to.be.equal(false);
+            expect(oflm.get('key3')).to.be.equal(null);
+
+            oflm.remove('key3');
+            expect(oflm.has('key3')).to.be.equal(false);
+
+            expect(oflm.pop()).to.be.equal(false);
+            expect(oflm.shift()).to.be.equal(0);
+
+            expect(oflm.has('key2')).to.be.equal(false);
+            expect(oflm.has('key2')).to.be.equal(false);
+        });
+
     });
 
-    describe('iterating', function () {
+    describe('iterating', function() {
 
-        it('should not iterate over empty', function () {
+        it('should not iterate over empty', function() {
             let oflm = new OFLM();
 
             var iteration = 0;
-            oflm.forEach(function () {
+            oflm.forEach(function() {
                 iteration++;
             });
 
@@ -331,7 +363,7 @@ describe('Ordered Fast Look Up Map', function () {
 
         });
 
-        it('should iterate over simple', function () {
+        it('should iterate over simple', function() {
             let keysCheck = [1, 2, 3, 4, 5];
             let valuesCheck = ["a", "b", "c", "d", "e"]
             let oflm = new OFLM(keysCheck, valuesCheck);
@@ -339,7 +371,7 @@ describe('Ordered Fast Look Up Map', function () {
             var iteration = 0;
             var keys = [];
             var values = [];
-            oflm.forEach(function (key, value) {
+            oflm.forEach(function(key, value) {
                 iteration++;
                 keys.push(key);
                 values.push(value);
@@ -349,7 +381,7 @@ describe('Ordered Fast Look Up Map', function () {
             expect(values).to.be.eql(valuesCheck);
         });
 
-        it('should iterate over complicated set', function () {
+        it('should iterate over complicated set', function() {
             let keysCheck = [6, 2, 8, 4, 7];
             let valuesCheck = ["f", "b", "h", "d", "g"]
             let oflm = new OFLM([1, 2, 3, 4, 5], ["a", "b", "c", "d", "e"]);
@@ -365,7 +397,7 @@ describe('Ordered Fast Look Up Map', function () {
             var iteration = 0;
             var keys = [];
             var values = [];
-            oflm.forEach(function (key, value) {
+            oflm.forEach(function(key, value) {
                 iteration++;
                 keys.push(key);
                 values.push(value);
@@ -375,7 +407,7 @@ describe('Ordered Fast Look Up Map', function () {
             expect(values).to.be.eql(valuesCheck);
         });
 
-        it('should iterate and break', function () {
+        it('should iterate and break', function() {
             let keysCheck = [1, 2, 3, 4, 5];
             let valuesCheck = ["a", "b", "c", "d", "e"]
             let oflm = new OFLM(keysCheck, valuesCheck);
@@ -384,7 +416,7 @@ describe('Ordered Fast Look Up Map', function () {
             var breakValue = 2;
             var keys = [];
             var values = [];
-            oflm.forEach(function (key, value) {
+            oflm.forEach(function(key, value) {
                 if (iteration >= breakValue) {
                     return true;
                 }
@@ -400,18 +432,18 @@ describe('Ordered Fast Look Up Map', function () {
 
         });
 
-        it('should not iterate over empty backwards', function () {
+        it('should not iterate over empty backwards', function() {
             let oflm = new OFLM();
 
             var iteration = 0;
-            oflm.forEachReverse(function () {
+            oflm.forEachReverse(function() {
                 iteration++;
             });
 
             expect(iteration).to.be.equal(0);
         })
 
-        it('should iterate backwards', function () {
+        it('should iterate backwards', function() {
             let keysCheck = [1, 2, 3, 4, 5];
             let valuesCheck = ["a", "b", "c", "d", "e"]
             let oflm = new OFLM(keysCheck, valuesCheck);
@@ -419,7 +451,7 @@ describe('Ordered Fast Look Up Map', function () {
             var iteration = 0;
             var keys = [];
             var values = [];
-            oflm.forEachReverse(function (key, value) {
+            oflm.forEachReverse(function(key, value) {
                 iteration++;
                 keys.push(key);
                 values.push(value);
@@ -429,7 +461,7 @@ describe('Ordered Fast Look Up Map', function () {
             expect(values).to.be.eql(valuesCheck.reverse());
         })
 
-        it('should iterate backwards and break', function () {
+        it('should iterate backwards and break', function() {
             let keysCheck = [1, 2, 3, 4, 5];
             let valuesCheck = ["a", "b", "c", "d", "e"]
             let oflm = new OFLM(keysCheck, valuesCheck);
@@ -438,7 +470,7 @@ describe('Ordered Fast Look Up Map', function () {
             var breakValue = 2;
             var keys = [];
             var values = [];
-            oflm.forEachReverse(function (key, value) {
+            oflm.forEachReverse(function(key, value) {
                 if (iteration >= breakValue) {
                     return true;
                 }
