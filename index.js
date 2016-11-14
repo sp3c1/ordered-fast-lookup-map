@@ -8,7 +8,7 @@ class OrderedFastLookupMap {
         this._array = [];
 
         try {
-            keys.forEach(function (index, val) {
+            keys.forEach(function(index, val) {
                 self.push(keys[val], values[val]);
             });
         } catch (e) {
@@ -24,6 +24,8 @@ class OrderedFastLookupMap {
      * @param value
      */
     set(key, value) {
+        this.undefinedCheck(value);
+
         if (key in this.map) { // if already exists
             this.map[key] = value;
         } else { // insert new key and value
@@ -34,6 +36,8 @@ class OrderedFastLookupMap {
 
     /** @brief alias to set - insert on the end */
     push(key, value) {
+        this.undefinedCheck(value);
+
         this.set(key, value);
     }
 
@@ -43,6 +47,8 @@ class OrderedFastLookupMap {
      * @param value
      */
     unshift(key, value) {
+        this.undefinedCheck(value);
+
         if (key in this.map) {
             this.map[key] = value;
         } else { // insert new key and value
@@ -58,6 +64,8 @@ class OrderedFastLookupMap {
      * @param value
      */
     arbitrarySetAfter(afterKey, key, value) {
+        this.undefinedCheck(value);
+
         let afterIndex = this._array.indexOf(afterKey) + 1;
         if (afterIndex == -1) {
             throw new Error('key does not exist');
@@ -73,6 +81,8 @@ class OrderedFastLookupMap {
      * @param value
      */
     arbitrarySetBefore(beforeKey, key, value) {
+        this.undefinedCheck(value);
+
         let beforeIndex = this._array.indexOf(beforeKey);
         if (beforeIndex == -1) {
             throw new Error('key does not exist');
@@ -136,7 +146,7 @@ class OrderedFastLookupMap {
      */
     get(key) {
         try {
-            if (this.map[key]) {
+            if (this.map[key] !== undefined) {
                 return this.map[key];
             } else {
                 return undefined;
@@ -153,7 +163,7 @@ class OrderedFastLookupMap {
      */
     has(key) {
         try {
-            if (this.map[key]) {
+            if (this.map[key] !== undefined) {
                 return true;
             } else {
                 return false;
@@ -199,6 +209,14 @@ class OrderedFastLookupMap {
             }
         }
     };
+
+    /***====================================== CHECK Methods ***/
+    undefinedCheck(value) {
+        if (value === undefined) {
+            throw new Error('Can not insert undefined. If you need empty entry use null isntead');
+        }
+    }
+
 }
 
 module.exports = OrderedFastLookupMap;
