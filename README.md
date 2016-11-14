@@ -39,6 +39,8 @@ not found it throws ```Error```.
 * ```arbitrarySetBefore(beforeKey, key, value)```sets the value before arbitrary supplied keys. If the arbitrary key is
 not found it throws ```Error```.
 
+Note if inserting ```undefined``` any method will throw exception. Please use null instead.
+
 ### Remove & Retrieve methods 
 * ```remove(key)``` remove arbitrary value on the key. If the arbitrary key is not found it throws```Error```.
 * ```pop()``` returns last element of structure and removes it. If list is empty returns ```undefined```
@@ -58,3 +60,7 @@ To break in user function return ```true```.
 * Async callback iterations
 * Promise iterations
 * weakGet
+* first
+* last
+* length
+* merge
