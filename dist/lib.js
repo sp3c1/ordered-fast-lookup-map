@@ -2,11 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderedFastLookupMap = exports.OrderedTyoedFastLookupMap = void 0;
 class OrderedTyoedFastLookupMap {
-    constructor(keys, values, validator) {
+    constructor(keys, values, options = { deepClone: false }) {
         this.map = {};
         this._array = [];
-        if (validator && validator instanceof Function) {
-            this.validator = validator.bind(this);
+        this.deepClone = false;
+        this.deepClone = !!(options === null || options === void 0 ? void 0 : options.deepClone);
+        if ((options === null || options === void 0 ? void 0 : options.validator) instanceof Function) {
+            this.validator = options.validator.bind(this);
+        }
+        if ((options === null || options === void 0 ? void 0 : options.deepCloneMethod) instanceof Function) {
+            this.deepCloneMethod = options.deepCloneMethod.bind(this);
         }
         for (const keyIndex in keys) {
             try {
@@ -25,13 +30,28 @@ class OrderedTyoedFastLookupMap {
         const check = this.validator(value);
         if (check === true || check === undefined) {
             if (`${key}` in this.map) {
-                this.map[`${key}`] = value;
+                this.map[`${key}`] = this.deepCloneOrRef(value);
             }
             else {
                 this._array.push(`${key}`);
-                this.map[`${key}`] = value;
+                this.map[`${key}`] = this.deepCloneOrRef(value);
             }
         }
+    }
+    deepCloneMethod(val) {
+        try {
+            let ref = Object.assign(Object.create(Object.getPrototypeOf(val)), val);
+            return ref;
+        }
+        catch (_) {
+            return val;
+        }
+    }
+    deepCloneOrRef(val) {
+        if (this.deepClone && typeof val === 'object') {
+            return this.deepCloneMethod(val);
+        }
+        return val;
     }
     push(key, value) {
         this.set(key, value);
@@ -40,11 +60,11 @@ class OrderedTyoedFastLookupMap {
         const check = this.validator(value);
         if (check === true || check === undefined) {
             if (`${key}` in this.map) {
-                this.map[`${key}`] = value;
+                this.map[`${key}`] = this.deepCloneOrRef(value);
             }
             else {
                 this._array.unshift(`${key}`);
-                this.map[`${key}`] = value;
+                this.map[`${key}`] = this.deepCloneOrRef(value);
             }
         }
     }
@@ -56,7 +76,7 @@ class OrderedTyoedFastLookupMap {
                 throw new Error('key does not exist');
             }
             this._array.splice(afterIndex, 0, `${key}`);
-            this.map[`${key}`] = value;
+            this.map[`${key}`] = this.deepCloneOrRef(value);
         }
     }
     arbitrarySetBefore(beforeKey, key, value) {
@@ -67,7 +87,7 @@ class OrderedTyoedFastLookupMap {
                 throw new Error('key does not exist');
             }
             this._array.splice(beforeIndex, 0, `${key}`);
-            this.map[`${key}`] = value;
+            this.map[`${key}`] = this.deepCloneOrRef(value);
         }
     }
     remove(key) {
@@ -151,8 +171,8 @@ class OrderedTyoedFastLookupMap {
 }
 exports.OrderedTyoedFastLookupMap = OrderedTyoedFastLookupMap;
 class OrderedFastLookupMap extends OrderedTyoedFastLookupMap {
-    constructor(keys, values, validator) {
-        super(keys, values, validator);
+    constructor(keys, values) {
+        super(keys, values);
     }
 }
 exports.OrderedFastLookupMap = OrderedFastLookupMap;

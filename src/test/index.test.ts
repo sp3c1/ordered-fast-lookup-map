@@ -1,4 +1,5 @@
-import { OrderedTyoedFastLookupMap, OrderedFastLookupMap, IOFMLoptions } from "../lib";
+import { IOFMLoptions, OrderedFastLookupMap, OrderedTyoedFastLookupMap } from '../lib';
+
 const OFLM = require('..');
 
 describe('Ordered Fast Look Up Map', () => {
@@ -90,7 +91,7 @@ describe('Ordered Fast Look Up Map', () => {
             }
         };
 
-        it("instatentiate correct class", () => {
+        it("instantiate correct class", () => {
             const foo = new testClass('bar');
             const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo]);
 
@@ -98,12 +99,35 @@ describe('Ordered Fast Look Up Map', () => {
             expect(oflm.map).toStrictEqual({ "1": foo });
         });
 
-        it("instatentiate correct class with custom  validator", () => {
+        it("instantiate correct class with custom  validator", () => {
             const foo = new testClass('bar');
             const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo], opts);
 
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": foo });
+        });
+
+        it("instantiate correct class with no deepClone", () => {
+            const foo = new testClass('bar');
+            opts.deepClone = false;
+
+            const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo], opts);
+            foo.x = 'booo';
+            expect(oflm._array).toStrictEqual(["1"]);
+            expect(oflm.map).toStrictEqual({ "1": foo });
+
+        });
+
+
+        it("instantiate correct class with deepClone", () => {
+            const foo = new testClass('bar');
+            const fooTest = new testClass('bar');
+            opts.deepClone = true;
+
+            const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo], opts);
+            foo.x = 'booo';
+            expect(oflm._array).toStrictEqual(["1"]);
+            expect(oflm.map).toStrictEqual({ "1": fooTest });
         });
 
         it("refuse to instantiate wrong type", () => {

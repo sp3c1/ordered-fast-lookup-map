@@ -4,7 +4,8 @@
   "description": "Map with order functionality, providing fast look ups and ordering in the same time.",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "build:dev": "tsc --watch",
     "build:publish": "tsc -p ./tsconfig.build.json"
   },

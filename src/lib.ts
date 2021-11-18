@@ -18,12 +18,13 @@ export class OrderedTyoedFastLookupMap<T> {
     constructor(keys?: NumberOrString[] | number[], values?: T[], options: IOFMLoptions<T> = { deepClone: false }) {
         this.deepClone = !!options?.deepClone;
 
+
         if (options?.validator instanceof Function) {
             this.validator = options.validator.bind(this);
         }
 
         if (options?.deepCloneMethod instanceof Function) {
-            this.deepClone = options.deepCloneMethod.bind(this);
+            this.deepCloneMethod = options.deepCloneMethod.bind(this);
         }
 
         for (const keyIndex in keys) {
@@ -55,14 +56,16 @@ export class OrderedTyoedFastLookupMap<T> {
                 this.map[`${key}`] = this.deepCloneOrRef(value);
             } else { // insert new key and value
                 this._array.push(`${key}`);
-                this.map[`${key}`] = this.deepCloneMethod(value);
+                this.map[`${key}`] = this.deepCloneOrRef(value);
             }
         }
     }
 
     private deepCloneMethod(val: T): T {
         try {
-            return <T>JSON.parse(JSON.stringify(val));
+            // let ref = Object.assign(Object.create(Object.getPrototypeOf(val)), JSON.parse(JSON.stringify(val)));
+            let ref = Object.assign(Object.create(Object.getPrototypeOf(val)), val);
+            return ref;
         } catch (_) {
             return val;
         }
@@ -105,7 +108,7 @@ export class OrderedTyoedFastLookupMap<T> {
      * @param key
      * @param value
      */
-    arbitrarySetAfter(afterKey: string, key: string, value: T): void {
+    arbitrarySetAfter(afterKey: NumberOrString, key: NumberOrString, value: T): void {
         const check = this.validator(value);
 
         if (check === true || check === undefined) {
@@ -124,7 +127,7 @@ export class OrderedTyoedFastLookupMap<T> {
      * @param key
      * @param value
      */
-    arbitrarySetBefore(beforeKey: string, key: string, value: T): void {
+    arbitrarySetBefore(beforeKey: NumberOrString, key: NumberOrString, value: T): void {
         const check = this.validator(value);
 
         if (check === true || check === undefined) {
@@ -143,7 +146,7 @@ export class OrderedTyoedFastLookupMap<T> {
      *
      * @param key
      */
-    remove(key: string): void {
+    remove(key: NumberOrString): void {
         let index = this._array.indexOf(`${key}`);
         if (index == -1) {
             throw new Error('key does not exist');
@@ -194,7 +197,7 @@ export class OrderedTyoedFastLookupMap<T> {
      * @param key
      * @returns {T}
      */
-    get(key: string): T {
+    get(key: NumberOrString): T {
         try {
             if (this.map[`${key}`] !== undefined) {
                 return this.map[`${key}`];
@@ -211,7 +214,7 @@ export class OrderedTyoedFastLookupMap<T> {
      * @param key
      * @returns {boolean}
      */
-    has(key: string): boolean {
+    has(key: NumberOrString): boolean {
         try {
             if (this.map[`${key}`] !== undefined) {
                 return true;
