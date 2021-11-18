@@ -17,7 +17,7 @@ var orderedMap = require("ordered-fast-lookup-map")
 var userMap = new orderedMap();
 ```
 
-### TS
+### TS / Types
 
 We are now providing the types in the lib.
 
