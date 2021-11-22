@@ -1,0 +1,76 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "lib": [
+        "es2015",
+        "es2017"
+      ],
+      "moduleResolution": "node",
+      "resolveJsonModule": false,
+      "rootDir": ".",
+      "outDir": ".",
+      // Declarations
+      "declaration": true,
+      "declarationMap": true,
+      // "declarationDir": "./typings/definitions",
+      // Sources
+      "sourceMap": true, // default is false
+      // "inlineSourceMap": false, 
+      // "inlineSources": false,
+      // Output augmentation
+      "removeComments": true,
+      "stripInternal": false,
+      "noImplicitUseStrict": false,
+      "importHelpers": true,
+      // Code quality
+      "newLine": "LF",
+      "strict": false, // TODO: true
+      "noUnusedLocals": false, // TODO: true
+      "noUnusedParameters": false, 
+      "noImplicitReturns": false, 
+      "noFallthroughCasesInSwitch": true,
+      "allowUnreachableCode": false,
+      "forceConsistentCasingInFileNames": true,
+      // "watch": false
+      // "baseUrl": for absolute path in imports
+      "typeRoots": [
+        "./node_modules/@types"
+      ],
+      "types": [
+        "node",
+        "jest"
+      ],
+      // "suppressExcessPropertyErrors": false,
+      // "suppressImplicitAnyIndexErrors": false
+      // "noResolve": false,
+      // "noStrictGenericChecks": false,
+      // "experimentalDecorators": false,
+      // "emitDecoratorMetadata": false,
+      // "noLib": false,
+      // "noEmit": true
+      // "emitDeclarationOnly": false,
+      // "listFiles": false,
+      // "preserveConstEnums": false,
+      // "skipLibCheck": false,
+      // "noEmitHelpers": false,
+      // "noEmitOnError": false,
+      // "disableSizeLimit": false,
+      // "listEmittedFiles": false,
+      // "noErrorTruncation": false,
+      // "traceResolution": false,
+      // "diagnostics": false,
+      // "pretty": true unless piping to another program or redirecting output to a file
+    },
+    "typeAcquisition": {
+      "enable": false
+      // "include": ["react"],
+      // "exclude": ["leftpad"]
+    },
+    "compileOnSave": false,
+    "exclude": [
+      "node_modules",
+    ],
+    // "include": [
+    //   "./**/*.ts" ]
+  }
