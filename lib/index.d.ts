@@ -33,4 +33,4 @@ export declare class OrderedTyoedFastLookupMap<T> {
 export declare class OrderedFastLookupMap extends OrderedTyoedFastLookupMap<any> {
     constructor(keys: string[], values: any[]);
 }
-//# sourceMappingURL=lib.d.ts.map
+//# sourceMappingURL=index.d.ts.map

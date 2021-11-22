@@ -86,7 +86,7 @@ type IOFMLoptions<T> = {
 New TS implementation should work as provious v1.1.2 when accessed through `require`. It assumes `OrderedTyoedFastLookupMap<any>` with default validator that throws error only when you try to set `undefined`. Also the `key` is always forced to be a string in the map (this might be breaking for some).
 
 ```
-import { OrderedTypedFastLookupMap, OrderedFastLookupMap } from "../lib";
+import { OrderedTypedFastLookupMap, OrderedFastLookupMap } from "ordered-fast-lookup-map/lib";
 
 // this is equivalent to const oflm = new OrderedFastLookupMap([`key`], [[{ "foo": "bar" }]]);
 const oflm = new OrderedTypedFastLookupMap<any[]>([`key`], [[{ "foo": "bar" }]]);

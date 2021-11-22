@@ -8,8 +8,8 @@
       ],
       "moduleResolution": "node",
       "resolveJsonModule": false,
-      "rootDir": "./src",
-      "outDir": "./dist",
+      "rootDir": ".",
+      "outDir": ".",
       // Declarations
       "declaration": true,
       "declarationMap": true,
@@ -36,7 +36,7 @@
       // "baseUrl": for absolute path in imports
       "typeRoots": [],
       "types": [
-        "jest"
+        "node"
       ]
       // "suppressExcessPropertyErrors": false,
       // "suppressImplicitAnyIndexErrors": false
@@ -67,8 +67,8 @@
     "compileOnSave": false,
     "exclude": [
       "node_modules",
-      "src/test/**/*.ts"
+      "test/**/*.ts"
     ],
-    "include": [
-      "src/**/*.ts" ]
+    // "include": [
+    //   "./**/*.ts" ]
   }
