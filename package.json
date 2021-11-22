@@ -1,8 +1,8 @@
 {
   "name": "ordered-fast-lookup-map",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "Map with order functionality, providing fast look ups and ordering in the same time.",
-  "main": "./dist/index.js",
+  "main": "./index.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
