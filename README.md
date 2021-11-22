@@ -1,6 +1,6 @@
 # Ordered Fast Lookup Map
 
-Map with order functionality, providing fast look ups and ordering in the same time wiht `O(n)` complexity. Newer TS implementation. DeepClones with typesafety. Customizable validator/marshaller and deepClone available.
+Map with order functionality, providing fast look ups and ordering in the same time with `O(n)` complexity. Newer TS implementation. DeepClones with typesafety. Customizable validator/marshaller and deepClone available.
 
 ## Installation
 
@@ -50,10 +50,10 @@ Note if inserting `undefined` any method will throw exception. Please use null i
 
 ## Iteration Methods
 
-- `forEach(callback: IteratorCallback<T>): void` for each element in `asc` order executes user supplied `function(index,value)`.
-  To break in user function return `true`.
-- `forEachReverse(callback: IteratorCallback<T>): void`for each element in `desc` order executes user supplied `function(index,value)`.
-  To break in user function return `true`.
+- `forEach(callback: IteratorCallback<T>): void` for each element in `asc` order executes user supplied `function(index,value,validatorFunction)`.
+  To break in user function return `true`. We are now exposing the validator method out.
+- `forEachReverse(callback: IteratorCallback<T>): void`for each element in `desc` order executes user supplied `function(index,value,validatorFunction)`.
+  To break in user function return `true`. We are now exposing the validator method out.
 
 ## Validator and deepClone
 
@@ -83,7 +83,7 @@ type IOFMLoptions<T> = {
 
 ## Migration / Example use
 
-New TS implementation should work as provious v1.1.2 when accessed through `require`. It assumes `OrderedTyoedFastLookupMap<any>` with default validator that throws error only when you try to set `undefined`. Also the `key` is always forced to be a string in the map (this might be breaking for some).
+New TS implementation should work as previous v1.1.2 when accessed through `require`. It assumes `OrderedTyoedFastLookupMap<any>` with default validator that throws error only when you try to set `undefined`. Also the `key` is always forced to be a string in the map (this might be breaking for some).
 
 ```
 import { OrderedTypedFastLookupMap, OrderedFastLookupMap } from "ordered-fast-lookup-map/lib";
@@ -92,10 +92,10 @@ import { OrderedTypedFastLookupMap, OrderedFastLookupMap } from "ordered-fast-lo
 const oflm = new OrderedTypedFastLookupMap<any[]>([`key`], [[{ "foo": "bar" }]]);
 
 console.log(oflm._array) // ["key"];
-constole.log(oflm.map); // { "key": [{ "foo": "bar" }] }
+console.log(oflm.map); // { "key": [{ "foo": "bar" }] }
 ```
 
-when imported in TS should allow for strict controll of storred types, and the `validator` method. validator now can `throw(default)` or return `true/false`.
+when imported in TS should allow for strict control of stored types, and the `validator` method. validator now can `throw(default)` or return `true/false`.
 <br><br>
 
 ```
