@@ -1,4 +1,4 @@
-import { IOFMLoptions, OrderedFastLookupMap, OrderedTyoedFastLookupMap } from '../lib';
+import { IOFMLoptions, OrderedFastLookupMap, OrderedTypedFastLookupMap } from '../lib';
 
 const OFLM = require('..');
 
@@ -6,21 +6,21 @@ describe('Ordered Fast Look Up Map', () => {
 
     describe("type string", () => {
         it("Inits", () => {
-            const oflm = new OrderedTyoedFastLookupMap<string>();
+            const oflm = new OrderedTypedFastLookupMap<string>();
 
             expect(oflm._array.length).toBe(0);
             expect(Object.values(oflm.map).length).toBe(0);
         });
 
         it("Inits null", () => {
-            const oflm = new OrderedTyoedFastLookupMap<string>(null, null);
+            const oflm = new OrderedTypedFastLookupMap<string>(null, null);
 
             expect(oflm._array.length).toBe(0);
             expect(Object.values(oflm.map).length).toBe(0);
         });
 
         it("Inits force non string without validator", () => {
-            const oflm = new OrderedTyoedFastLookupMap<string>([`1`], [<any>false]);
+            const oflm = new OrderedTypedFastLookupMap<string>([`1`], [<any>false]);
 
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": false });
@@ -34,7 +34,7 @@ describe('Ordered Fast Look Up Map', () => {
                     }
                 }
             };
-            const oflm = new OrderedTyoedFastLookupMap<string>([`1`], [<any>false], opts);
+            const oflm = new OrderedTypedFastLookupMap<string>([`1`], [<any>false], opts);
 
             expect(oflm._array).toStrictEqual([]);
             expect(oflm.map).toStrictEqual({});
@@ -50,14 +50,14 @@ describe('Ordered Fast Look Up Map', () => {
                 }
             };
 
-            const oflm = new OrderedTyoedFastLookupMap<string>([`1`], [<any>false], opts);
+            const oflm = new OrderedTypedFastLookupMap<string>([`1`], [<any>false], opts);
 
             expect(oflm._array).toStrictEqual([]);
             expect(oflm.map).toStrictEqual({});
         });
 
         it("Inits string", () => {
-            const oflm = new OrderedTyoedFastLookupMap<string>([`1`], ["a"]);
+            const oflm = new OrderedTypedFastLookupMap<string>([`1`], ["a"]);
 
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": "a" });
@@ -66,7 +66,7 @@ describe('Ordered Fast Look Up Map', () => {
 
     describe("type array", () => {
         it("Inits ", () => {
-            const oflm = new OrderedTyoedFastLookupMap<string[]>([`1`], [["a"]]);
+            const oflm = new OrderedTypedFastLookupMap<string[]>([`1`], [["a"]]);
 
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": ["a"] });
@@ -93,7 +93,7 @@ describe('Ordered Fast Look Up Map', () => {
 
         it("instantiate correct class", () => {
             const foo = new testClass('bar');
-            const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo]);
+            const oflm = new OrderedTypedFastLookupMap<testClass>([`1`], [foo]);
 
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": foo });
@@ -101,7 +101,7 @@ describe('Ordered Fast Look Up Map', () => {
 
         it("instantiate correct class with custom  validator", () => {
             const foo = new testClass('bar');
-            const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo], opts);
+            const oflm = new OrderedTypedFastLookupMap<testClass>([`1`], [foo], opts);
 
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": foo });
@@ -111,7 +111,7 @@ describe('Ordered Fast Look Up Map', () => {
             const foo = new testClass('bar');
             opts.deepClone = false;
 
-            const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo], opts);
+            const oflm = new OrderedTypedFastLookupMap<testClass>([`1`], [foo], opts);
             foo.x = 'booo';
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": foo });
@@ -124,7 +124,7 @@ describe('Ordered Fast Look Up Map', () => {
             const fooTest = new testClass('bar');
             opts.deepClone = true;
 
-            const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo], opts);
+            const oflm = new OrderedTypedFastLookupMap<testClass>([`1`], [foo], opts);
             foo.x = 'booo';
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": fooTest });
@@ -132,7 +132,7 @@ describe('Ordered Fast Look Up Map', () => {
 
         it("refuse to instantiate wrong type", () => {
             const foo = new testClassWrong('bar');
-            const oflm = new OrderedTyoedFastLookupMap<testClass>([`1`], [foo], opts);
+            const oflm = new OrderedTypedFastLookupMap<testClass>([`1`], [foo], opts);
 
             expect(oflm._array).toStrictEqual([]);
             expect(oflm.map).toStrictEqual({});
@@ -142,7 +142,7 @@ describe('Ordered Fast Look Up Map', () => {
 
     describe("any", () => {
         it("Inits manual", () => {
-            const oflm = new OrderedTyoedFastLookupMap<any[]>([`1`], [[{ "a": 1 }]]);
+            const oflm = new OrderedTypedFastLookupMap<any[]>([`1`], [[{ "a": 1 }]]);
 
             expect(oflm._array).toStrictEqual(["1"]);
             expect(oflm.map).toStrictEqual({ "1": [{ "a": 1 }] });
