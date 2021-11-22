@@ -7,7 +7,7 @@ export declare type IOFMLoptions<T> = {
     deepClone?: boolean;
     deepCloneMethod?: IDeepCloneFunction<T>;
 };
-export declare class OrderedTyoedFastLookupMap<T> {
+export declare class OrderedTypedFastLookupMap<T> {
     map: {
         [k: string]: T;
     };
@@ -30,7 +30,7 @@ export declare class OrderedTyoedFastLookupMap<T> {
     forEach(callback: IteratorCallback<T>): void;
     forEachReverse(callback: IteratorCallback<T>): void;
 }
-export declare class OrderedFastLookupMap extends OrderedTyoedFastLookupMap<any> {
+export declare class OrderedFastLookupMap extends OrderedTypedFastLookupMap<any> {
     constructor(keys: string[], values: any[]);
 }
 //# sourceMappingURL=index.d.ts.map

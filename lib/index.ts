@@ -10,7 +10,7 @@ export type IOFMLoptions<T> = {
 
 }
 
-export class OrderedTyoedFastLookupMap<T> {
+export class OrderedTypedFastLookupMap<T> {
     public map: { [k: string]: T } = {}
     public _array = [];
     private deepClone = false;
@@ -265,7 +265,7 @@ export class OrderedTyoedFastLookupMap<T> {
 
 }
 
-export class OrderedFastLookupMap extends OrderedTyoedFastLookupMap<any> {
+export class OrderedFastLookupMap extends OrderedTypedFastLookupMap<any> {
     constructor(keys: string[], values: any[]) {
         super(keys, values);
     }
